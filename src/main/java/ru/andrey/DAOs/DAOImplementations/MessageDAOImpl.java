@@ -1,5 +1,6 @@
-package ru.andrey.DAOs;
+package ru.andrey.DAOs.DAOImplementations;
 
+import ru.andrey.DAOs.DAOInterfaces.MessageDAO;
 import ru.andrey.Domain.Message;
 import ru.andrey.Domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ public class MessageDAOImpl implements MessageDAO {
         @Override
         public Message mapRow(ResultSet resultSet, int i) throws SQLException {
             Message message = new Message();
-            message.setContent(resultSet.getString("content"));
-            message.setSrcUserID(resultSet.getInt("src_user_id"));
-            message.setDstUserID(resultSet.getInt("dst_user_id"));
+            message.setContent(resultSet.getString("msg_content"));
+            message.setSrcUserID(resultSet.getInt("msg_src_user_id"));
+            message.setDstUserID(resultSet.getInt("msg_dst_user_id"));
 
             return message;
         }
@@ -39,8 +40,8 @@ public class MessageDAOImpl implements MessageDAO {
     @Override
     public List<Message> messagesByUser(String userName) {
         return jdbcTemplate.query(
-                "SELECT content, src_user_id, dst_user_id from message " +
-                        "where src_user_id = (SELECT id FROM users WHERE username = ?)",
+                "SELECT msg_content, msg_src_user_id, msg_dst_user_id from messages " +
+                        "WHERE msg_src_user_id = (SELECT user_id FROM users WHERE user_username = ?)",
                 new Object[]{userName},
                 messageRowMapper
         );

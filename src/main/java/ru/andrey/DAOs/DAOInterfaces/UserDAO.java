@@ -1,4 +1,4 @@
-package ru.andrey.DAOs;
+package ru.andrey.DAOs.DAOInterfaces;
 
 import ru.andrey.Domain.User;
 

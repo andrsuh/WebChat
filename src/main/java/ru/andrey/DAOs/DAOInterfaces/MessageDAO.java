@@ -1,5 +1,6 @@
-package ru.andrey.DAOs;
+package ru.andrey.DAOs.DAOInterfaces;
 
+import org.springframework.security.access.annotation.Secured;
 import ru.andrey.Domain.Message;
 import ru.andrey.Domain.User;
 
