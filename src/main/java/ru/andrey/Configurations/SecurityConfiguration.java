@@ -11,15 +11,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .anyRequest().authenticated();
-        http
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .authorizeRequests().antMatchers("/messages/*").hasAuthority("ADMIN")
                 .and()
-                .logout()
-                .permitAll();
+                .authorizeRequests().antMatchers("/user").authenticated()
+                .and()
+                .authorizeRequests().antMatchers("/registration").permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .and()
+                .logout().permitAll()
+                .and()
+                .authorizeRequests().anyRequest().authenticated();
     }
 
 }

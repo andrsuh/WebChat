@@ -1,7 +1,15 @@
 package ru.andrey.DAOs.DAOInterfaces;
 
-/**
- * Created by andrey on 02.06.16.
- */
-public class OrganisationDAO {
+import ru.andrey.Domain.Department;
+import ru.andrey.Domain.Organisation;
+import ru.andrey.Domain.Position;
+
+import java.util.List;
+
+public interface OrganisationDAO {
+    Organisation getOrganisation(String orgName);
+
+    List<Department> getAllDepartments();
+
+    List<Position> getAllPositions();
 }

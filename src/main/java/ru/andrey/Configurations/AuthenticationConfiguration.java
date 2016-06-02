@@ -20,8 +20,8 @@ public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerA
                 .jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery(
-                        "select username, password, enabled from users where username=?")
+                        "select user_username, user_password, user_enabled from users where user_username=?")
                 .authoritiesByUsernameQuery(
-                        "select username, role from user_roles where username=?");
+                        "select roles_username, roles_role from roles where roles_username=?");
     }
 }

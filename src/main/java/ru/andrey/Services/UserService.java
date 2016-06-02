@@ -1,7 +1,9 @@
 package ru.andrey.Services;
 
-/**
- * Created by andrey on 02.06.16.
- */
 public interface UserService {
+//    User getUser(String userName);
+
+//    void addUser(User user);
+
+//    List<User> getAllUserFriends(String username);
 }
