@@ -15,10 +15,24 @@ public class RegistrationController {
     @Autowired
     private OrganisationDAOImpl organisationDAO;
 
+    @RequestMapping(value = "/org_choice", method = RequestMethod.GET)
+    public String getOrganisation(ModelMap model) {
+        Organisation organisation = new Organisation();
+        model.addAttribute("organisation", organisation);
+        model.addAttribute("orgList", organisationDAO.getAllOrganisation());
+
+        return "org_choice";
+    }
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String getRegistration(ModelMap model) {
+    public String getRegistration(@ModelAttribute Organisation organisation, ModelMap model) {
         User newUser = new User();
+        System.out.println("|" + organisation.getName() + "|");
+        newUser.setOrganisation(organisation.getName());
+
         model.put("newUser", newUser);
+        model.put("depList", organisationDAO.getAllDepartments(organisation.getName()));
+        model.put("posList", organisationDAO.getAllPositions(organisation.getName()));
 
         return "registration";
     }
@@ -27,7 +41,8 @@ public class RegistrationController {
     public String addNewUser(@ModelAttribute("newUser") User user) {
 
         Organisation organisation = organisationDAO.getOrganisation(user.getOrganisation());
-        System.out.println(organisation.getId());
+//        System.out.println(organisation.getId());
+//        System.out.println(user.getSex());
 
         return "user";
     }

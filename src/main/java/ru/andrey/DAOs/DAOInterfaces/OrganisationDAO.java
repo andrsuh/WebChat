@@ -9,7 +9,9 @@ import java.util.List;
 public interface OrganisationDAO {
     Organisation getOrganisation(String orgName);
 
-    List<Department> getAllDepartments();
+    List<Organisation> getAllOrganisation();
 
-    List<Position> getAllPositions();
+    List<Department> getAllDepartments(String orgName);
+
+    List<Position> getAllPositions(String orgName);
 }
