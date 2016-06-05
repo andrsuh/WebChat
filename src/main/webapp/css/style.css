@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+}
+
+
+body {
+    background: #545454;
+}
+
+.bubble:before {
+}
+
+.main-shape {
+    display: block;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    height: 800px; /*Global Height of Widget*/
+    width: 1200px; /*Global Width of Widget*/
+    background: #E1E1E1;
+    box-shadow: 0px 0px 50px #1E1E1E;
+}
+
+.main-shape > .header {
+    width: 100%;
+    height: 10%;
+    background: #6A8BBA;
+}
+
+.main-shape > .header > .logo {
+    padding-left: 5%;
+    float: left;
+}
+
+.main-shape > .north {
+    width: 100%;
+    height: 90%;
+    color: #000000; /*6A9BDF*/
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+.main-shape > .north > .main-left {
+    float: left;
+    text-align: right;
+    width: 25%;
+    height: 97%;
+    overflow-x: hidden;
+    margin: 1%;
+    background: #B7CC90;/*D1D1A1*/
+    box-shadow: 0 1px 1px rgba(0,0,0,.17) inset;
+
+    /*-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;*/
+}
+
+.main-shape > .north > .main-right {
+    /*list-style-type: none;*/
+    float: right;
+    /*clear: left;*/
+    width: 71%;
+    height: 97%;
+    overflow-x: hidden;
+    margin: 1%;
+    background: #D1D1D1;
+    box-shadow: 0 1px 1px rgba(0,0,0,.17) inset;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.main-shape > .north > .main-right > .header {
+    font-size: 30px;
+    padding-top: 5%;
+}
+
+.main-shape > .north > .main-right > p {
+    font-size: 30px;
+}
+
+.main-shape > .north > .main-right > .submit-button {
+    width: 150px;
+    height: 25px;
+}
+
+.main-shape > .north > .main-right > .sign-up {
+    float: center;
+    /*padding-left: 5%;*/
+    padding-top: 5%;
+    text-align: center;
+    font-size: 30px;
+}
+
+.main-shape > .north > .main-right > .motivation {
+
+}
+
+.main-shape > .north > .main-left > form {
+    float: left;
+    font-size: 20px;
+    margin-left: 20%;
+}

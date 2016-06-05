@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Threaded Chat - CodePen</title>
+    <link rel="stylesheet" th:href="css/style_dialogs.css" media="screen" type="text/css" />
+</head>
+<body>
+  <div id="wrapper">
+			<div class="message-container">
+                <div class="header">
+                    <div class="logo">
+                        <img src="images/logo.jpeg" />
+                    </div>
+                    <button>Log out</button>
+                    <button>Find user</button>
+                </div>
+				<div class="message-north">
+					<ul class="message-user-list">
+						<li>
+							<a href="#">
+								<!-- <span class="user-img"> -->
+                                    <img class="user-img" src="images/monkey.jpg">
+                                <!-- </span> -->
+								<span class="user-title">Bryan Adams</span>
+								<p class="user-desc">badams@music.com</p>
+							</a>
+						</li>
+					</ul>
+					<div class="message-thread">
+						<div class="message bubble-left">
+							<label class="message-user">Bryan Adams</label>
+							<label class="message-timestamp">2 Hours Ago</label>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam feugiat nunc ut nibh interdum tempus. Donec at lorem eget sapien iaculis porttitor id quis ligula feugiat nunc ut nibh justo eget elit aliquet interdum tempus.</p>
+						</div>
+						<div class="message bubble-right">
+							<label class="message-user">Jack Johnson</label>
+							<label class="message-timestamp">2 Hours Ago</label>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam feugiat nunc ut nibh interdum tempus. Donec at lorem eget sapien iaculis porttitor id quis ligula feugiat nunc ut nibh justo eget elit aliquet interdum tempus.</p>
+						</div>
+
+					</div>
+				</div>
+                <div class="message-south">
+                    <textarea cols="20" rows="3"></textarea>
+                    <button>Send</button>
+                </div>
+			</div>
+		</div>
+  <script src="js/index.js"></script>
+</body>
+</html>
