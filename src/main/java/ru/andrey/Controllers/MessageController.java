@@ -21,18 +21,15 @@ public class MessageController {
     @RequestMapping(value = {"/", "/user"})
     public String listMessages(ModelMap modelMap) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        List<Message> messageList = dao.messagesByUser(auth.getName());
-
-        modelMap.put("messageList", messageList);
         return "user";
     }
 
     @RequestMapping("/user/{userName}")
     public String allMessagebByUser(@PathVariable String userName, ModelMap modelMap) {
-        List<Message> messageList = dao.messagesByUser(userName);
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Message> messageList = dao.messagesByUser(auth.getName(), userName);
         modelMap.put("messageList", messageList);
+
         return "user";
     }
 }

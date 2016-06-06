@@ -36,6 +36,8 @@ CREATE TABLE IF NOT EXISTS friendShip (
 
 CREATE TABLE IF NOT EXISTS messages (
     msg_id INTEGER PRIMARY KEY DEFAULT nextval('message_id_seq'),
+
+    msg_time TIMESTAMP NOT NULL,
     msg_dst_user_id INTEGER REFERENCES users(user_id),
     msg_src_user_id INTEGER REFERENCES users(user_id),
 
@@ -162,11 +164,20 @@ INSERT INTO friendShip VALUES(11, 10);
 INSERT INTO friendShip VALUES(11, 8);
 
 -- Messages
-INSERT INTO messages(msg_dst_user_id, msg_src_user_id, msg_content)
+INSERT INTO messages(msg_time, msg_dst_user_id, msg_src_user_id, msg_content)
 VALUES
-    (8, 11, 'Hey Lada'),
-    (8, 11, 'How are you?'),
-    (8, 11, 'Bye!'),
-    (11, 8, 'Hey Andrey!'),
-    (11, 8, 'How are you?'),
-    (11, 8, 'Bye!');
+    ('2004-10-19 10:23:54', 8, 11, 'Hey Andrey'),
+    ('2004-10-19 10:23:56', 8, 11, 'How are you?'),
+    ('2004-10-19 10:23:58', 8, 11, 'Bye!'),
+    ('2004-10-19 10:23:55', 11, 8, 'Hey Lada!'),
+    ('2004-10-19 10:23:57', 11, 8, 'How are you?'),
+    ('2004-10-19 10:23:59', 11, 8, 'Bye!');
+
+
+
+CREATE OR REPLACE FUNCTION getUserIdByName(name TEXT)
+RETURNS INTEGER AS $$
+BEGIN
+    RETURN (SELECT user_id FROM users WHERE user_username = name);
+END;
+$$ LANGUAGE plpgsql;

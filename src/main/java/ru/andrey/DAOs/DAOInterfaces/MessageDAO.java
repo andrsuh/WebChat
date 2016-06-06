@@ -12,7 +12,7 @@ import java.util.List;
 public interface MessageDAO {
     void addMessage(Message message, User toUser, User fromUser);
 
-    List<Message> messagesByUser(String userName);
+    List<Message> messagesByUser(String fstName, String sndName);
 
     // removeMessage
 }

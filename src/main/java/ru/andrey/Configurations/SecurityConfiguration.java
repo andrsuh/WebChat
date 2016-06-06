@@ -12,11 +12,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
 
-                .authorizeRequests().antMatchers("/**").permitAll()
-                .and()
+//                .authorizeRequests().antMatchers("/**").permitAll()
+//                .and()
                 .authorizeRequests().antMatchers("/messages/*").hasAuthority("ADMIN")
                 .and()
-                .authorizeRequests().antMatchers("/user").authenticated()
+                .authorizeRequests().antMatchers("/user/*").authenticated()
+                .and()
+                .authorizeRequests().antMatchers("/main").authenticated()
                 .and()
                 .authorizeRequests().antMatchers("/registration").permitAll()
                 .and()
