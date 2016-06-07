@@ -5,9 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.andrey.DAOs.DAOImplementations.UserDAOImpl;
 import ru.andrey.DAOs.DAOInterfaces.MessageDAO;
 import ru.andrey.DAOs.DAOInterfaces.UserDAO;
@@ -42,4 +40,9 @@ public class MainController {
         return "main";
     }
 
+    @RequestMapping(value="/allUsers", method = RequestMethod.GET)
+    public @ResponseBody List<User> getAllUsers() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userDAO.allFriends(auth.getName());
+    }
 }

@@ -48,13 +48,13 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List<User> allFriends(String login) {
         Integer userId = jdbcTemplate.queryForObject(
-                "select * from getUserIdByName(?)",
+                "SELECT * FROM getUserIdByName(?)",
                 Integer.class,
                 login
         );
 
         return jdbcTemplate.query(
-                "SELECT user_id, user_name FROM users JOIN " +
+                "SELECT * FROM users JOIN " +
                         "(SELECT F.frd_other_friend_id id from users JOIN friendShip F " +
                         "ON users.user_id = F.frd_friend_id WHERE users.user_id = ?) TEMP ON users.user_id = TEMP.id",
                 new Object[]{userId},
