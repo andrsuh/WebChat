@@ -5,6 +5,11 @@
     <title>Threaded Chat - CodePen</title>
     <link rel="stylesheet" th:href="@{/css/style_dialogs.css}" href="../../webapp/css/style_dialogs.css" media="screen"
           type="text/css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+    <script th:src="@{/js/sockjs-0.3.4.js}" src="../../webapp/js/sockjs-0.3.4.js"></script>
+    <script th:src="@{/js/stomp.js}" src="../../webapp/js/stomp.js"></script>
+
 </head>
 <body>
 <div id="wrapper">
@@ -18,7 +23,7 @@
         </div>
         <div class="message-north">
             <ul class="message-user-list">
-                <li th:each="friend: ${friends}">
+                <li th:each="friend: ${friends}" th:id="${friend.getId()}" class="user">
                     <a href="#">
                          <span class="user-img">
                             <img class="user-img" src="images/monkey.jpg"/>
@@ -46,6 +51,6 @@
         </div>
     </div>
 </div>
-<script src="js/index.js"></script>
+<script th:src="@{/js/1.js}" src="../../webapp/js/1.js"></script>
 </body>
 </html>

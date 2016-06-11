@@ -1,5 +1,9 @@
 package ru.andrey.Controllers;
 
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.andrey.DAOs.DAOInterfaces.MessageDAO;
 import ru.andrey.Domain.Message;
@@ -9,7 +13,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.andrey.Domain.User;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -17,12 +23,8 @@ public class MessageController {
     @Autowired
     private MessageDAO dao; // change to message service
 
-
-    @RequestMapping(value = {"/", "/user"})
-    public String listMessages(ModelMap modelMap) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return "user";
-    }
+//    @Autowired
+//    SimpMessagingTemplate template;
 
     @RequestMapping("/user/{userName}")
     public String allMessagebByUser(@PathVariable String userName, ModelMap modelMap) {
@@ -30,6 +32,28 @@ public class MessageController {
         List<Message> messageList = dao.messagesByUser(auth.getName(), userName);
         modelMap.put("messageList", messageList);
 
+        return "user";
+    }
+
+//    @RequestMapping("/user/{userName}")
+//    public void allMessagebByUser(@PathVariable String userName) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        List<Message> messageList = dao.messagesByUser(auth.getName(), userName);
+//
+//        template.convertAndSend("/online", messageList.get(0));
+//    }
+
+    @MessageMapping("/messages")
+    @SendTo("/userMessages/name")
+    public List<Message> allMessagebByUser(User user, Principal principal) throws InterruptedException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Message> messageList = dao.messagesByUser(principal.getName(), user.getUsername());
+        return messageList;
+    }
+
+    @RequestMapping(value = {"/", "/user"})
+    public String listMessages(ModelMap modelMap) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return "user";
     }
 }
