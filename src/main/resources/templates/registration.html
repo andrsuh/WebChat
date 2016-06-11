@@ -50,6 +50,17 @@
 
                         <p><input placeholder="about" type="text" th:field="*{details}"/></p>
 
+                        <!--<p>Position: <input type="text" th:field="*{position}" /></p>-->
+
+
+                        <p>Organisation:
+                            <select th:field="*{organisation}">
+                                <option th:each="o : ${ogranisation}""
+                                        th:value="${organisation}"
+                                        th:text="${organisation.getName()}">dep
+                                </option>
+                            </select>
+                        </p>
                         <p>Department:
                             <select th:field="*{department}">
                                 <option th:each="d : ${depList}"
@@ -67,7 +78,6 @@
                                 </option>
                             </select>
                         </p>
-                        <!--<p>Department: <input type="text" th:field="*{department}" /></p>-->
                         <!--<p>Position: <input type="text" th:field="*{position}" /></p>-->
                         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
                     </form>

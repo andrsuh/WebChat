@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import ru.andrey.DAOs.DAOInterfaces.OrganisationDAO;
 import ru.andrey.DAOs.DAOInterfaces.UserDAO;
 import ru.andrey.Domain.User;
 
@@ -13,6 +14,9 @@ import java.util.List;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
+
+    @Autowired
+    private OrganisationDAO organisationDAO;
 
     private JdbcTemplate jdbcTemplate;
 
@@ -31,10 +35,6 @@ public class UserDAOImpl implements UserDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
-    public void addUser(String username, String password) {
-
-    }
 
     @Override
     public User getUserByLogin(String login) {
@@ -43,6 +43,29 @@ public class UserDAOImpl implements UserDAO {
                 new Object[]{login},
                 userRowMapper
         );
+    }
+
+    @Override
+    public void addUser(User user) {
+        Integer posId = organisationDAO.getPositionIdByName(user.getPosition());
+        Integer depId = organisationDAO.getDepartmentIdByName(user.getDepartment());
+        Integer orgId = organisationDAO.getOrganisationIdByName(user.getOrganisation());
+
+        jdbcTemplate.update("INSERT INTO users(\n" +
+                " user_username," +
+                " user_password," +
+                " user_enabled," +
+                " user_name," +
+                " user_sex," +
+                " user_details," +
+                " user_position_id," +
+                " user_department_id," +
+                " user_organisation_id" +
+                " ) VALUES" +
+                " (?, ?, true, ?, ?, ?, ?, ?, ?)",
+                user.getUsername(), user.getPassword(),
+                true, user.getName(), user.getSex(),
+                user.getDetails(), posId, depId, orgId);
     }
 
     @Override

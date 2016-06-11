@@ -31,6 +31,33 @@ public class OrganisationDAOImpl implements OrganisationDAO {
         }
     };
 
+    @Override
+    public Integer getOrganisationIdByName(String name) {
+        return jdbcTemplate.queryForObject(
+                "SELECT org_id FROM organisations WHERE org_name = ?",
+                Integer.class,
+                name
+        );
+    }
+
+    @Override
+    public Integer getDepartmentIdByName(String name) {
+        return jdbcTemplate.queryForObject(
+                "SELECT dep_id FROM departments WHERE dep_name = ?",
+                Integer.class,
+                name
+        );
+    }
+
+    @Override
+    public Integer getPositionIdByName(String name) {
+        return jdbcTemplate.queryForObject(
+                "SELECT pos_id FROM positions WHERE pos_name = ?",
+                Integer.class,
+                name
+        );
+    }
+
     @Autowired
     public void setJdbcTemplate(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);

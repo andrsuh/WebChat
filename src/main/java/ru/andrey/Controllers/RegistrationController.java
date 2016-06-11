@@ -6,14 +6,18 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.andrey.DAOs.DAOImplementations.OrganisationDAOImpl;
+import ru.andrey.DAOs.DAOInterfaces.OrganisationDAO;
+import ru.andrey.DAOs.DAOInterfaces.UserDAO;
 import ru.andrey.Domain.Organisation;
 import ru.andrey.Domain.User;
 
 @Controller
 public class RegistrationController {
     @Autowired
-    private OrganisationDAOImpl organisationDAO;
+    private OrganisationDAO organisationDAO;
+
+    @Autowired
+    private UserDAO userDAO;
 
     @RequestMapping(value = "/org_choice", method = RequestMethod.GET)
     public String getOrganisation(ModelMap model) {
@@ -28,9 +32,10 @@ public class RegistrationController {
     public String getRegistration(@ModelAttribute Organisation organisation, ModelMap model) {
         User newUser = new User();
 //        System.out.println("|" + organisation.getName() + "|");
-        newUser.setOrganisation(organisation.getName());
+//        newUser.setOrganisation(organisation.getName());
 
         model.put("newUser", newUser);
+        model.put("organisation", organisation);
         model.put("depList", organisationDAO.getAllDepartments(organisation.getName()));
         model.put("posList", organisationDAO.getAllPositions(organisation.getName()));
 
@@ -39,11 +44,9 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String addNewUser(@ModelAttribute("newUser") User user) {
+        System.out.println(user.getOrganisation());
 
-        Organisation organisation = organisationDAO.getOrganisation(user.getOrganisation());
-//        System.out.println(organisation.getId());
-//        System.out.println(user.getSex());
-
+        userDAO.addUser(user);
         return "user";
     }
 }

@@ -14,4 +14,10 @@ public interface OrganisationDAO {
     List<Department> getAllDepartments(String orgName);
 
     List<Position> getAllPositions(String orgName);
+
+    Integer getPositionIdByName(String name);
+
+    Integer getDepartmentIdByName(String name);
+
+    Integer getOrganisationIdByName(String name);
 }
