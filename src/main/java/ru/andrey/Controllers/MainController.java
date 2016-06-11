@@ -28,15 +28,15 @@ public class MainController {
 
         List<User> friends = userDAO.allFriends(auth.getName());
         modelMap.put("friends", friends);
-
-        // getting all messages between two users and put it into the model
-        List<Message> messageList = messageDAO.messagesByUser(auth.getName(), otherUser);
-        modelMap.put("messageList", messageList);
-
-        // put into the model current and other user
-        modelMap.put("currentUser", userDAO.getUserByLogin(auth.getName()));
-        modelMap.put("otherUser", userDAO.getUserByLogin(otherUser));
-
+//
+//        // getting all messages between two users and put it into the model
+//        List<Message> messageList = messageDAO.messagesByUser(auth.getName(), otherUser);
+//        modelMap.put("messageList", messageList);
+//
+//        // put into the model current and other user
+//        modelMap.put("currentUser", userDAO.getUserByLogin(auth.getName()));
+//        modelMap.put("otherUser", userDAO.getUserByLogin(otherUser));
+//
         return "main";
     }
 

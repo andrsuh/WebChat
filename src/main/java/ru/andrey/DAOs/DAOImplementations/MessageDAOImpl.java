@@ -46,26 +46,25 @@ public class MessageDAOImpl implements MessageDAO {
 //          (msg_src_user_id = 11 AND msg_dst_user_id = 8);
 
     @Override
-    public List<Message> messagesByUser(String fstName, String sndName) {
-
-        Integer fstId = jdbcTemplate.queryForObject(
+    public List<Message> messagesByUser(String authenticatedUserName, Integer otherUserId) {
+        Integer authenticatedUserId = jdbcTemplate.queryForObject(
                 "select * from getUserIdByName(?)",
                 Integer.class,
-                fstName
+                authenticatedUserName
         );
 
-        Integer sndId = jdbcTemplate.queryForObject(
-                "select * from getUserIdByName(?)",
-                Integer.class,
-                sndName
-        );
+//        Integer sndId = jdbcTemplate.queryForObject(
+//                "select * from getUserIdByName(?)",
+//                Integer.class,
+//                sndName
+//        );
 
         return jdbcTemplate.query(
                 "SELECT msg_content, msg_src_user_id, msg_dst_user_id from messages " +
                     "WHERE (msg_src_user_id = ? AND msg_dst_user_id = ?) OR " +
                     "(msg_src_user_id = ? AND msg_dst_user_id = ?)" +
                     "ORDER BY msg_time",
-                new Object[]{fstId, sndId, sndId, fstId},
+                new Object[]{authenticatedUserId, otherUserId, otherUserId, authenticatedUserId},
                 messageRowMapper
         );
     }

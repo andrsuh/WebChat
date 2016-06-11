@@ -26,14 +26,14 @@ public class MessageController {
 //    @Autowired
 //    SimpMessagingTemplate template;
 
-    @RequestMapping("/user/{userName}")
-    public String allMessagebByUser(@PathVariable String userName, ModelMap modelMap) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<Message> messageList = dao.messagesByUser(auth.getName(), userName);
-        modelMap.put("messageList", messageList);
-
-        return "user";
-    }
+//    @RequestMapping("/user/{userName}")
+//    public String allMessagebByUser(@PathVariable String userName, ModelMap modelMap) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        List<Message> messageList = dao.messagesByUser(auth.getName(), userName);
+//        modelMap.put("messageList", messageList);
+//
+//        return "user";
+//    }
 
 //    @RequestMapping("/user/{userName}")
 //    public void allMessagebByUser(@PathVariable String userName) {
@@ -47,7 +47,7 @@ public class MessageController {
     @SendTo("/userMessages/name")
     public List<Message> allMessagebByUser(User user, Principal principal) throws InterruptedException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<Message> messageList = dao.messagesByUser(principal.getName(), user.getUsername());
+        List<Message> messageList = dao.messagesByUser(principal.getName(), user.getId());
         return messageList;
     }
 
