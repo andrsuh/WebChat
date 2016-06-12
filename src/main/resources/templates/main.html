@@ -18,7 +18,10 @@
             <div class="logo">
                 <img src="images/logo.jpeg"/>
             </div>
-            <button>Log out</button>
+            <form th:action="@{/logout}" method="post" id="Sign out"></form> // it needs to fix
+            <button value="Sign Out" type="submit" form="Sign out">Log out</button>
+
+            <!--<input type="submit" value="Sign Out" />-->
             <button>Find user</button>
         </div>
         <div class="message-north">
