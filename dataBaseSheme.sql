@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS messages (
 
     msg_content TEXT NOT NULL,
 
-    FOREIGN KEY (msg_src_user_id, msg_dst_user_id)
-        REFERENCES friendShip(frd_friend_id, frd_other_friend_id)
+--     FOREIGN KEY (msg_src_user_id, msg_dst_user_id)
+--         REFERENCES friendShip(frd_friend_id, frd_other_friend_id)
 );
 
 CREATE TABLE IF NOT EXISTS organisations (
