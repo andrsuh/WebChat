@@ -25,7 +25,7 @@ body {
 
 .main-shape > .header {
     width: 100%;
-    height: 10%;
+    height: 11%;
     background: #6A8BBA;
 }
 
@@ -36,7 +36,7 @@ body {
 
 .main-shape > .north {
     width: 100%;
-    height: 90%;
+    height: 89%;
     color: #000000; /*6A9BDF*/
 
     -webkit-box-sizing: border-box;
