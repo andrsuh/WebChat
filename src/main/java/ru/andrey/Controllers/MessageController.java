@@ -2,10 +2,12 @@ package ru.andrey.Controllers;
 
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.andrey.DAOs.DAOInterfaces.MessageDAO;
+import ru.andrey.DAOs.DAOInterfaces.UserDAO;
 import ru.andrey.Domain.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,6 +24,9 @@ import java.util.List;
 public class MessageController {
     @Autowired
     private MessageDAO dao; // change to message service
+
+    @Autowired
+    private UserDAO userDAO;
 
     @Autowired
     private SimpMessagingTemplate socket;
@@ -54,16 +59,17 @@ public class MessageController {
 //    }
 
     @MessageMapping("messages/newMessage/{userToID}")
-    public void newMessage(@DestinationVariable Integer userToID, String content, Principal principal) {
-        System.out.println(userToID);
-        dao.addMessage(principal.getName(), userToID, content);
-        socket.convertAndSend("/userMessages/" +  principal.getName() + "/" + userToID, content);
+    public void newMessage(@DestinationVariable Integer userToID, @Payload String content, Principal principal) {
+        Message message = dao.addMessage(principal.getName(), userToID, content);
+        User user = userDAO.getUserByLogin(principal.getName());
+        User otherUser = userDAO.getUserByID(userToID);
+        socket.convertAndSend("/userMessages/newMessage/" +  otherUser.getUsername() + "/" + user.getId(), message);
+
     }
 
 
     @MessageMapping("/messages/{userID}")
     public void allMessagesByUser(@DestinationVariable Integer userID, Principal principal) {
-        System.out.println(userID);
         List<Message> messageList = dao.messagesByUser(principal.getName(), userID);
         socket.convertAndSend("/userMessages/" +  principal.getName() + "/" + userID, messageList);
     }

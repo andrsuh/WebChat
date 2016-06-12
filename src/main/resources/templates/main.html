@@ -32,7 +32,7 @@
                             <img class="user-img" src="images/monkey.jpg"/>
                          </span>
                         <span class="user-title" th:text="${friend.getName()}">Bryan Adams</span>
-                        <!--<p class="user-desc">badams@music.com</p>-->
+                        <div class="circle" hidden="true"></div>
                     </a>
                 </li>
             </ul>
@@ -49,8 +49,8 @@
             </div>
         </div>
         <div class="message-south">
-            <textarea cols="20" rows="3"></textarea>
-            <button>Send</button>
+            <textarea id="msgTextArea" cols="20" rows="3"></textarea>
+            <button id="sendButton" >Send</button>
         </div>
     </div>
 </div>

@@ -25,6 +25,7 @@ public class UserDAOImpl implements UserDAO {
         public User mapRow(ResultSet resultSet, int i) throws SQLException {
             User user = new User();
             user.setId(resultSet.getInt("user_id"));
+            user.setUsername(resultSet.getString("user_username"));
             user.setName(resultSet.getString("user_name"));
             return user;
         }
@@ -35,6 +36,14 @@ public class UserDAOImpl implements UserDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
+    public User getUserByID(Integer userID) {
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM users WHERE user_id = ?",
+                new Object[]{userID},
+                userRowMapper
+        );
+    }
 
     @Override
     public User getUserByLogin(String login) {

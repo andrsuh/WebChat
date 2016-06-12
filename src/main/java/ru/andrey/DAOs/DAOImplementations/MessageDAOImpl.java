@@ -37,7 +37,7 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     @Override
-    public void addMessage(String fromUserName, Integer toUserID, String content) {
+    public Message addMessage(String fromUserName, Integer toUserID, String content) {
         Integer fromUserID = jdbcTemplate.queryForObject(
                 "SELECT user_id FROM users WHERE user_username = ?",
                 Integer.class,
@@ -49,10 +49,16 @@ public class MessageDAOImpl implements MessageDAO {
                     " VALUES\n" +
                     " (?, ?, ?, ?)",
                 new Timestamp(Calendar.getInstance().getTimeInMillis()),
-                fromUserID,
                 toUserID,
+                fromUserID,
                 content
         );
+        Message message = new Message();
+        message.setSrcUserID(fromUserID);
+        message.setDstUserID(toUserID);
+        message.setContent(content);
+
+        return message;
     }
 
 //    WITH fst AS (
