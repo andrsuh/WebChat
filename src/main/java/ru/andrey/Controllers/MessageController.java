@@ -53,10 +53,11 @@ public class MessageController {
 //        return messageList;
 //    }
 
-    @RequestMapping("/messages/{userID}")
-    public void allMessagesByUser(@PathVariable("userID") String userID, Principal principal) {
-        List<Message> messageList = dao.messagesByUser(principal.getName(), Integer.parseInt(userID));
-        socket.convertAndSend("/userMessages/" + principal.getName() + "/" + userID, messageList);
+    @MessageMapping("/messages/{userID}")
+    public void allMessagesByUser(@DestinationVariable Integer userID, Principal principal) {
+        System.out.println(userID);
+        List<Message> messageList = dao.messagesByUser(principal.getName(), userID);
+        socket.convertAndSend("/userMessages/" +  principal.getName() + "/" + userID, messageList);
     }
 
     @RequestMapping(value = {"/", "/user"})
