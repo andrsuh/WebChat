@@ -12,6 +12,8 @@ import ru.andrey.Domain.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 @Repository
@@ -35,9 +37,24 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     @Override
-    public void addMessage(Message message, User toUser, User fromUser) {
+    public void addMessage(String fromUserName, Integer toUserID, String content) {
+        Integer fromUserID = jdbcTemplate.queryForObject(
+                "SELECT user_id FROM users WHERE user_username = ?",
+                Integer.class,
+                fromUserName
+        );
 
+        jdbcTemplate.update(
+                "INSERT INTO messages(msg_time, msg_dst_user_id, msg_src_user_id, msg_content)\n" +
+                    " VALUES\n" +
+                    " (?, ?, ?, ?)",
+                new Timestamp(Calendar.getInstance().getTimeInMillis()),
+                fromUserID,
+                toUserID,
+                content
+        );
     }
+
 //    WITH fst AS (
 //      SELECT user_id FROM users WHERE user_username = 'Andrey Sukhovitskiy'
 //    ), snd as (

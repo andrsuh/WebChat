@@ -10,7 +10,7 @@ import java.util.List;
  * Created by andrey on 30.05.16.
  */
 public interface MessageDAO {
-    void addMessage(Message message, User toUser, User fromUser);
+    void addMessage(String fromUserName, Integer toUserID, String content);
 
     List<Message> messagesByUser(String authenticatedUserName, Integer otherUserId);
 

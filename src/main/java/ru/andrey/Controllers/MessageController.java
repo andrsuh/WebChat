@@ -53,6 +53,14 @@ public class MessageController {
 //        return messageList;
 //    }
 
+    @MessageMapping("messages/newMessage/{userToID}")
+    public void newMessage(@DestinationVariable Integer userToID, String content, Principal principal) {
+        System.out.println(userToID);
+        dao.addMessage(principal.getName(), userToID, content);
+        socket.convertAndSend("/userMessages/" +  principal.getName() + "/" + userToID, content);
+    }
+
+
     @MessageMapping("/messages/{userID}")
     public void allMessagesByUser(@DestinationVariable Integer userID, Principal principal) {
         System.out.println(userID);
