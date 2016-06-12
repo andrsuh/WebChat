@@ -11,8 +11,10 @@ $('.bubble-left').click(function() {
 // })
 
 
+
 $(document).ready(function() {
     var $users = [];
+
     $.ajax( {
         type: "GET",
         url:  "/allUsers",
@@ -27,28 +29,50 @@ $(document).ready(function() {
         },
     });
 
+    var counter = 0;
 
+    $('.user').click(function(event) {
+        counter++;
+        $('.message-thread').empty();
+        var socket = new SockJS('/messages');
+        stompClient = Stomp.over(socket);
+        var id = $(this).attr('id');
+        var $result = $.grep($users, function(e){ return e.id == id; });
+        var $friendName = $result[0].name;
+        var $myName = "me";
+        stompClient.connect({}, function(frame) {
+            stompClient.send("/app/messages", {}, JSON.stringify({ 'id': id }));
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/userMessages/name', function(greeting){
+                alert(id);
+                // alert(greeting.body);
+                $.each(jQuery.parseJSON(greeting.body), function(idx, msg) {
+                    var $innerName;
+                    var $sideName;
+                    if (msg.srcUserID == id) {
+                        $sideName = "bubble-left";
+                        $innerName = $("<label>", {class: "message-user"}).text($friendName);
+                    } else {
+                        $innerName = $("<label>", {class: "message-user"}).text($myName);
+                        $sideName = "bubble-right"
+                    }
+                    var $innerMsg = $("<p>").text(msg.content + " " + counter);
+                    var $div = $("<div>", {class: "message " + $sideName})
+                        .append($innerName).append($innerMsg);
+                    $(".message-thread").append($div);
+                    // $(".message-thread").prepend($("<div class='message bubble-left'></div>"));
 
-})
+                })
+            });
 
-
-$('.user').click(function() {
-
-    var socket = new SockJS('/messages');
-    stompClient = Stomp.over(socket);
-    // alert("Hello!")
-    stompClient.connect({}, function(frame) {
-        // setConnected(true);
-        alert("Sending");
-        stompClient.send("/app/messages", {}, JSON.stringify({ 'username': "acane" }));
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/userMessages/name', function(greeting){
-            alert(greeting.body);
-            // alert(JSON.parse(greeting.body).content);
         });
-    });
+
+    })
 
 })
+
+
+
 
 
 
