@@ -74,9 +74,9 @@ public class MessageController {
         socket.convertAndSend("/userMessages/" +  principal.getName() + "/" + userID, messageList);
     }
 
-    @RequestMapping(value = {"/", "/user"})
-    public String listMessages(ModelMap modelMap) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return "user";
-    }
+//    @RequestMapping(value = {"/", "/user"})
+//    public String listMessages(ModelMap modelMap) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        return "user";
+//    }
 }
