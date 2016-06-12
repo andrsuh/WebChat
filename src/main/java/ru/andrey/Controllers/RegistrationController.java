@@ -30,7 +30,7 @@ public class RegistrationController {
 //        return "org_choice";
 //    }
 
-    @RequestMapping(value = "/registration")
+    @RequestMapping("/registration")
     public String getRegistration(ModelMap model) {
         model.addAttribute("organisations", organisationDAO.getAllOrganisation());
         model.addAttribute("newUser", new User());

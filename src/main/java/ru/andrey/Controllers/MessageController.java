@@ -23,7 +23,7 @@ import java.util.List;
 @Controller
 public class MessageController {
     @Autowired
-    private MessageDAO dao; // change to message service
+    private MessageDAO dao;
 
     @Autowired
     private UserDAO userDAO;
@@ -73,10 +73,4 @@ public class MessageController {
         List<Message> messageList = dao.messagesByUser(principal.getName(), userID);
         socket.convertAndSend("/userMessages/" +  principal.getName() + "/" + userID, messageList);
     }
-
-//    @RequestMapping(value = {"/", "/user"})
-//    public String listMessages(ModelMap modelMap) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        return "user";
-//    }
 }
