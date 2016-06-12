@@ -25,7 +25,7 @@ public class MainController {
     private UserDAO userDAO;
 
     @RequestMapping("/main")
-    private String showMain(ModelMap modelMap, @RequestParam(value = "otherUser") String otherUser) {
+    private String showMain(ModelMap modelMap) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         List<User> friends = userDAO.allFriends(auth.getName());

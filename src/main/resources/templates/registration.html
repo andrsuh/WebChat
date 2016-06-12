@@ -60,31 +60,31 @@
                         <!--<p>Position: <input type="text" th:field="*{position}" /></p>-->
 
 
-                        <!--<p>Organisation:-->
-                        <!--<select th:field="*{organisation}">-->
-                        <!--<option th:each="o : ${ogranisation}"-->
-                        <!--th:value="${organisation}"-->
-                        <!--th:text="${organisation.getName()}">dep-->
+                        <p>Organisation:
+                            <select th:field="*{organisation}">
+                                <option th:each="org : ${organisations}"
+                                        th:value="${org.getName()}"
+                                        th:text="${org.getName()}">dep
+                                </option>
+                            </select>
+                        </p>
+                        <!--<p>Department:-->
+                            <!--<select th:field="*{department}">-->
+                                <!--<option th:each="d : ${depList}"-->
+                                        <!--th:value="${d.name}"-->
+                                        <!--th:text="${d.name}">dep-->
+                                <!--</option>-->
+                            <!--</select>-->
+                        <!--</p>-->
+                        <!--<input type="text" th:field="*{organisation}" th:value="${organisation}" hidden="true"/>-->
+                        <!--<p>Position:-->
+                        <!--<select th:field="*{position}">-->
+                        <!--<option th:each="pos : ${posList}"-->
+                        <!--th:value="${pos.getName()}"-->
+                        <!--th:text="${pos.getName()}">dep-->
                         <!--</option>-->
                         <!--</select>-->
                         <!--</p>-->
-                        <p>Department:
-                            <select th:field="*{department}">
-                                <option th:each="d : ${depList}"
-                                        th:value="${d.name}"
-                                        th:text="${d.name}">dep
-                                </option>
-                            </select>
-                        </p>
-                        <input type="text" th:field="*{organisation}" th:value="${organisation}" hidden="true"/>
-                        <p>Position:
-                            <select th:field="*{position}">
-                                <option th:each="pos : ${posList}"
-                                        th:value="${pos.getName()}"
-                                        th:text="${pos.getName()}">dep
-                                </option>
-                            </select>
-                        </p>
                         <!--<p>Position: <input type="text" th:field="*{position}" /></p>-->
                         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
                     </form>
