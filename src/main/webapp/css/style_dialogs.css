@@ -96,6 +96,42 @@ body {
 	width: 120px;
 }
 
+.message-container > .header > textarea {
+	float: right;
+	background: #6A8BBF;
+	padding-top: 10px;
+	margin-top: 35px;
+	color: white;
+	padding-right: 20px;
+}
+
+
+/* Different color for some fields */
+
+#name_2::-webkit-input-placeholder,
+#search::-webkit-input-placeholder
+{
+	color:    white;
+}
+
+#name_2:-moz-placeholder,
+#search:-moz-placeholder
+{
+	color:    white;
+}
+
+#name_2::-moz-placeholder,
+#search::-moz-placeholder
+{
+	color:    white;
+}
+
+#name_2:-ms-input-placeholder,
+#search:-ms-input-placeholder
+{
+	color:    white;
+}
+
 .message-container > .header > button:hover {
 	background: -webkit-linear-gradient(#90B2CC, #6A8BBA);
 	background:    -moz-linear-gradient(#90B2CC, #6A8BBA);

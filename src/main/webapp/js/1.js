@@ -62,9 +62,11 @@ $(document).ready(function () {
 
 
     $("#sendButton").click(function () {
-        stompClient.send("/app/messages/newMessage/" + activeUserID, {}, $("#msgTextArea").val()); //, {}, JSON.stringify({ 'id': id }));
-        addMessage(-1, activeUserID, $("#msgTextArea").val());
-        $("#msgTextArea").val('');
+        if ($("#msgTextArea").val()) {
+            stompClient.send("/app/messages/newMessage/" + activeUserID, {}, $("#msgTextArea").val()); //, {}, JSON.stringify({ 'id': id }));
+            addMessage(-1, activeUserID, $("#msgTextArea").val());
+            $("#msgTextArea").val('');
+        }
     })
 
     function setActive(activeUserID, id) {
@@ -112,6 +114,46 @@ $(document).ready(function () {
             });
 
         },
+    });
+
+    $("#msgTextArea").keydown(function(event){
+        if (event.keyCode == 13 && event.ctrlKey){
+            $("#sendButton").click();
+        }
+    });
+
+    $('#search').bind('input propertychange', function() {
+
+        if (!$('#search').val()) {
+
+        }
+        $matchedFriends = [];
+        var $result = $.grep($users, function (e) {
+            if (e.name.toLowerCase().indexOf($('#search').val().toLowerCase()) >= 0) {
+                $matchedFriends.push(e.id);
+            }
+        })
+        $.each($users, function (idx, user) {
+            $flag = 0;
+            $.each($matchedFriends, function (idx2, friend) {
+                if (friend == user.id) {
+                    $flag = 1;
+                }
+            })
+            if ($flag) {
+                $('#' + user.id).show();
+            } else {
+                $('#' + user.id).hide();
+
+            }
+
+        })
+
+
+
+        // if(this.value.length){
+        //     $("#yourBtnID").show();
+        // }
     });
 
 })
