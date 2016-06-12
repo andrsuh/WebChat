@@ -23,6 +23,8 @@ public class MessageController {
     @Autowired
     private MessageDAO dao; // change to message service
 
+    @Autowired
+    private SimpMessagingTemplate socket;
 //    @Autowired
 //    SimpMessagingTemplate template;
 
@@ -43,12 +45,18 @@ public class MessageController {
 //        template.convertAndSend("/online", messageList.get(0));
 //    }
 
-    @MessageMapping("/messages")
-    @SendTo("/userMessages/name")
-    public List<Message> allMessagebByUser(User user, Principal principal) throws InterruptedException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<Message> messageList = dao.messagesByUser(principal.getName(), user.getId());
-        return messageList;
+//    @MessageMapping("/messages")
+//    @SendTo("/userMessages/name")
+//    public List<Message> allMessagebByUser(User user, Principal principal) throws InterruptedException {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        List<Message> messageList = dao.messagesByUser(principal.getName(), user.getId());
+//        return messageList;
+//    }
+
+    @RequestMapping("/messages/{userID}")
+    public void allMessagesByUser(@PathVariable("userID") String userID, Principal principal) {
+        List<Message> messageList = dao.messagesByUser(principal.getName(), Integer.parseInt(userID));
+        socket.convertAndSend("/userMessages/" + principal.getName() + "/" + userID, messageList);
     }
 
     @RequestMapping(value = {"/", "/user"})

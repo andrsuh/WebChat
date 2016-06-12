@@ -5,11 +5,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import ru.andrey.DAOs.DAOImplementations.UserDAOImpl;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import ru.andrey.DAOs.DAOInterfaces.MessageDAO;
 import ru.andrey.DAOs.DAOInterfaces.UserDAO;
-import ru.andrey.Domain.Message;
 import ru.andrey.Domain.User;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class MainController {
     private UserDAO userDAO;
 
     @RequestMapping("/main")
-    private String showMain(ModelMap modelMap, @RequestParam(value="otherUser") String otherUser) {
+    private String showMain(ModelMap modelMap, @RequestParam(value = "otherUser") String otherUser) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         List<User> friends = userDAO.allFriends(auth.getName());
@@ -40,8 +41,10 @@ public class MainController {
         return "main";
     }
 
-    @RequestMapping(value="/allUsers", method = RequestMethod.GET)
-    public @ResponseBody List<User> getAllUsers() {
+    @RequestMapping(value = "/allUsers", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<User> getAllUsers() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userDAO.allFriends(auth.getName());
     }

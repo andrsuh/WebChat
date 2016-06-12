@@ -35,7 +35,6 @@
                     <p align="center">Connect with coolegues and the world around you.</p>
                 </div>
                 <div class="sign-up">
-                    <h1>Form</h1>
                     <form action="#" th:action="@{/registration}" th:object="${newUser}" method="post">
                         <p><input placeholder="login" type="text" th:field="*{username}"/></p>
                         <p><input placeholder="password" type="text" th:field="*{password}"/></p>
@@ -53,14 +52,14 @@
                         <!--<p>Position: <input type="text" th:field="*{position}" /></p>-->
 
 
-                        <p>Organisation:
-                            <select th:field="*{organisation}">
-                                <option th:each="o : ${ogranisation}""
-                                        th:value="${organisation}"
-                                        th:text="${organisation.getName()}">dep
-                                </option>
-                            </select>
-                        </p>
+                        <!--<p>Organisation:-->
+                            <!--<select th:field="*{organisation}">-->
+                                <!--<option th:each="o : ${ogranisation}"-->
+                                        <!--th:value="${organisation}"-->
+                                        <!--th:text="${organisation.getName()}">dep-->
+                                <!--</option>-->
+                            <!--</select>-->
+                        <!--</p>-->
                         <p>Department:
                             <select th:field="*{department}">
                                 <option th:each="d : ${depList}"
@@ -69,7 +68,7 @@
                                 </option>
                             </select>
                         </p>
-
+                        <input type="text" th:field="*{organisation}" th:value="${organisation}"  hidden="true" />
                         <p>Position:
                             <select th:field="*{position}">
                                 <option th:each="pos : ${posList}"

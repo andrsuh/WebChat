@@ -31,8 +31,7 @@ public class RegistrationController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String getRegistration(@ModelAttribute Organisation organisation, ModelMap model) {
         User newUser = new User();
-//        System.out.println("|" + organisation.getName() + "|");
-//        newUser.setOrganisation(organisation.getName());
+        newUser.setOrganisation(organisation.getName());
 
         model.put("newUser", newUser);
         model.put("organisation", organisation);

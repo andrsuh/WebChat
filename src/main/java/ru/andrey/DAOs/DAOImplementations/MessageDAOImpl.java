@@ -1,12 +1,14 @@
 package ru.andrey.DAOs.DAOImplementations;
 
-import ru.andrey.DAOs.DAOInterfaces.MessageDAO;
-import ru.andrey.Domain.Message;
-import ru.andrey.Domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+import ru.andrey.DAOs.DAOInterfaces.MessageDAO;
+import ru.andrey.Domain.Message;
+import ru.andrey.Domain.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -59,11 +61,12 @@ public class MessageDAOImpl implements MessageDAO {
 //                sndName
 //        );
 
+
         return jdbcTemplate.query(
                 "SELECT msg_content, msg_src_user_id, msg_dst_user_id from messages " +
-                    "WHERE (msg_src_user_id = ? AND msg_dst_user_id = ?) OR " +
-                    "(msg_src_user_id = ? AND msg_dst_user_id = ?)" +
-                    "ORDER BY msg_time",
+                        "WHERE (msg_src_user_id = ? AND msg_dst_user_id = ?) OR " +
+                        "(msg_src_user_id = ? AND msg_dst_user_id = ?)" +
+                        "ORDER BY msg_time",
                 new Object[]{authenticatedUserId, otherUserId, otherUserId, authenticatedUserId},
                 messageRowMapper
         );

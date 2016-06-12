@@ -51,6 +51,8 @@ public class UserDAOImpl implements UserDAO {
         Integer depId = organisationDAO.getDepartmentIdByName(user.getDepartment());
         Integer orgId = organisationDAO.getOrganisationIdByName(user.getOrganisation());
 
+        user.setEnabled(true);
+
         jdbcTemplate.update("INSERT INTO users(\n" +
                 " user_username," +
                 " user_password," +
@@ -62,9 +64,9 @@ public class UserDAOImpl implements UserDAO {
                 " user_department_id," +
                 " user_organisation_id" +
                 " ) VALUES" +
-                " (?, ?, true, ?, ?, ?, ?, ?, ?)",
+                " (?, ?, ?, ?, ?::sex, ?, ?, ?, ?)",
                 user.getUsername(), user.getPassword(),
-                true, user.getName(), user.getSex(),
+                user.isEnabled(), user.getName(), user.getSex(),
                 user.getDetails(), posId, depId, orgId);
     }
 
