@@ -1,3 +1,5 @@
+
+
 $('.bubble-left').click(function () {
     $(this).toggleClass('message-clicked');
 });
@@ -40,8 +42,11 @@ $(document).ready(function () {
         $innerName = $("<label>", {class: "message-user"}).text($senderName);
 
         var $innerMsg = $("<p>").text(msg + " ");
+        var $dt = new Date();
+        var $time = $("<label>", {class: "message-timestamp"}).text($dt.getHours() + ":" + $dt.getMinutes());
+
         var $div = $("<div>", {class: "message " + $sideName})
-            .append($innerName).append($innerMsg);
+            .append($innerName).append($time).append($innerMsg);
         $(".message-thread").append($div);
         var block = document.getElementsByClassName("message-thread")[0];
         block.scrollTop = block.scrollHeight;

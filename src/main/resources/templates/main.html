@@ -42,7 +42,7 @@
                         <label class="message-user"
                                th:text="${msg.getSrcUserID()} == ${currentUser.getId()}? ${currentUser.getName()} : ${otherUser.getName()}">Sender
                             name</label>
-                        <!--<label class="message-timestamp">2 Hours Ago</label>-->
+                        <label class="message-timestamp">2 Hours Ago</label>
                         <p th:text="${msg.getContent()}">Text og the message</p>
                     </div>
                 </div>

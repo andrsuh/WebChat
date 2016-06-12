@@ -4,6 +4,9 @@
     <meta charset="UTF-8"/>
     <title>Threaded Chat - CodePen</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" href="../../webapp/css/style.css" media="all" type="text/css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script th:src="@{/js/sockjs-0.3.4.js}" src="../../webapp/js/sockjs-0.3.4.js"></script>
+    <script th:src="@{/js/stomp.js}" src="../../webapp/js/stomp.js"></script>
 </head>
 <body>
 <!--<img src="images/logo.jpeg" />-->
@@ -37,61 +40,58 @@
                     </p>
                 </form>
             </div>
-            <div class="main-right">
+            <div id="regField" class="main-right">
                 <div class="header">
-                    <p align="center"><strong>Welcome!</strong></p>
-                    <p align="center">Connect with coolegues and the world around you.</p>
+                    <p id="w" align="center"><strong>Welcome!</strong></p>
+                    <p id="c" align="center">Connect with colleagues and the world around you.</p>
                 </div>
                 <div class="sign-up">
                     <form action="#" th:action="@{/registration}" th:object="${newUser}" method="post">
-                        <p><input placeholder="login" type="text" th:field="*{username}"/></p>
-                        <p><input placeholder="password" type="text" th:field="*{password}"/></p>
-                        <p><input placeholder="name" type="text" th:field="*{name}"/></p>
+                        <p><input id="login" placeholder="login" type="text" th:field="*{username}"/></p>
+                        <p><input id="password" placeholder="password" type="text" th:field="*{password}"/></p>
+                        <p><input id="name" placeholder="name" type="text" th:field="*{name}"/></p>
 
-                        <p>Sex:
-                            <select th:field="*{sex}">
+                        <p id="sexField">Sex:
+                            <select id="sex" th:field="*{sex}">
                                 <option value="male">male</option>
                                 <option value="female">female</option>
                             </select>
                         </p>
 
-                        <p><input placeholder="about" type="text" th:field="*{details}"/></p>
+                        <p><input id="about" placeholder="about" type="text" th:field="*{details}"/></p>
 
                         <!--<p>Position: <input type="text" th:field="*{position}" /></p>-->
 
 
-                        <p>Organisation:
-                            <select th:field="*{organisation}">
+                        <p id="organisation">Organisation:
+                            <select id="selectOrganisation" th:field="*{organisation}">
                                 <option th:each="org : ${organisations}"
                                         th:value="${org.getName()}"
                                         th:text="${org.getName()}">dep
                                 </option>
                             </select>
                         </p>
-                        <!--<p>Department:-->
-                            <!--<select th:field="*{department}">-->
-                                <!--<option th:each="d : ${depList}"-->
-                                        <!--th:value="${d.name}"-->
-                                        <!--th:text="${d.name}">dep-->
-                                <!--</option>-->
-                            <!--</select>-->
-                        <!--</p>-->
+                        <p id="department" hidden="True">Department:
+                            <select id="selectDepartment">
+                            </select>
+                        </p>
                         <!--<input type="text" th:field="*{organisation}" th:value="${organisation}" hidden="true"/>-->
-                        <!--<p>Position:-->
-                        <!--<select th:field="*{position}">-->
-                        <!--<option th:each="pos : ${posList}"-->
-                        <!--th:value="${pos.getName()}"-->
-                        <!--th:text="${pos.getName()}">dep-->
-                        <!--</option>-->
-                        <!--</select>-->
-                        <!--</p>-->
+                        <p id="position" hidden="True">Position:
+                            <select id="selectPosition">
+                            </select>
+                        </p>
                         <!--<p>Position: <input type="text" th:field="*{position}" /></p>-->
-                        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+                        <!--<p><input id="submit" type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>-->
+                        <!--<button id="submit"> Submit </button>-->
+                        <input type="button" id="falseSubmit" value="Submit"/>
+                        <input hidden="True" type="button" id="trueSubmit" value="Submit"/>
+                        <input type="button" id="reset" value="Reset"/>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script th:src="@{/js/registration.js}" src="../../webapp/js/registration.js"></script>
 </body>
 </html>

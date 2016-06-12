@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.andrey.DAOs.DAOInterfaces.OrganisationDAO;
 import ru.andrey.DAOs.DAOInterfaces.UserDAO;
+import ru.andrey.Domain.Department;
 import ru.andrey.Domain.Organisation;
 import ru.andrey.Domain.Position;
 import ru.andrey.Domain.User;
@@ -37,20 +38,36 @@ public class RegistrationController {
         return "registration";
     }
 
-//    @RequestMapping(value = "/o/{org}", method = RequestMethod.POST)
-//    public
-//    @ResponseBody
-//    List<Position> getPositionsByOrganisation(@PathVariable("org") String organisation) {
-//        return organisationDAO.getAllPositions(organisation);
-//    }
-
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "/positions/{org}", method = RequestMethod.GET)
     public
-//    @ResponseBody
-    List<Position> getPositionsByOrganisation(@RequestParam(value = "org", required = true) String org) {
-        System.out.println(org);
-        return organisationDAO.getAllPositions(org);
+    @ResponseBody
+    List<Position> getPositionsByOrganisation(@PathVariable("org") String organisation) {
+        return organisationDAO.getAllPositions(organisation);
     }
+
+    @RequestMapping(value = "/departments/{org}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Department> getDepartmentsByOrganisation(@PathVariable("org") String organisation) {
+        return organisationDAO.getAllDepartments(organisation);
+    }
+
+    @RequestMapping(value = "/newUser", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addNewUser(@RequestBody User user) {
+        System.out.println(user.getUsername());
+        userDAO.addUser(user);
+        return "success";
+    }
+
+//    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+//    public
+////    @ResponseBody
+//    List<Position> getPositionsByOrganisation(@RequestParam(value = "org", required = true) String org) {
+//        System.out.println(org);
+//        return organisationDAO.getAllPositions(org);
+//    }
 
 //    @RequestMapping(value = "/registration", method = RequestMethod.GET)
 //    public String getRegistration(@ModelAttribute Organisation organisation, ModelMap model) {
