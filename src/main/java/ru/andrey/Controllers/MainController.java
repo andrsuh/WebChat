@@ -15,6 +15,8 @@ import ru.andrey.DAOs.DAOInterfaces.UserDAO;
 import ru.andrey.Domain.User;
 
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -49,7 +51,14 @@ public class MainController {
     @ResponseBody
     List<User> getAllUsers() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return userDAO.allFriends(auth.getName());
+//        System.out.println(auth.getName());
+//
+//        List<User> l = userDAO.allColeagues(auth.getName());
+//        for (User user: l) {
+//            System.out.println(user.getUsername());
+//        }
+
+        return userDAO.allColeagues(auth.getName());
     }
 
     @RequestMapping(value = "/myName", method = RequestMethod.GET)
@@ -57,7 +66,7 @@ public class MainController {
     @ResponseBody
     String getMyName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getName());
+//        System.out.println(auth.getName());
         return auth.getName();
     }
 }
