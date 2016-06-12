@@ -13,4 +13,6 @@ public interface UserDAO {
     void addUser(User user);
 
     List<User> allFriends(String login);
+
+    List<User> allColeagues(String login);
 }

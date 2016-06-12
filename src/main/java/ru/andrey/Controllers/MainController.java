@@ -29,8 +29,9 @@ public class MainController {
     private String showMain(ModelMap modelMap) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        List<User> friends = userDAO.allFriends(auth.getName());
+        List<User> friends = userDAO.allColeagues(auth.getName());
         modelMap.put("friends", friends);
+
 //
 //        // getting all messages between two users and put it into the model
 //        List<Message> messageList = messageDAO.messagesByUser(auth.getName(), otherUser);

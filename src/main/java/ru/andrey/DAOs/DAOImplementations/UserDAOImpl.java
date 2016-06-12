@@ -55,12 +55,29 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public List<User> allColeagues(String login) {
+        Integer organisationID = jdbcTemplate.queryForObject(
+                "SELECT user_organisation_id FROM users WHERE user_username = ?",
+                Integer.class,
+                login
+        );
+
+        return jdbcTemplate.query(
+                "SELECT * FROM users WHERE user_organisation_id = ? AND user_username <> ?",
+                new Object[]{organisationID, login},
+                userRowMapper
+        );
+    }
+
+    @Override
     public void addUser(User user) {
         Integer posId = organisationDAO.getPositionIdByName(user.getPosition());
         Integer depId = organisationDAO.getDepartmentIdByName(user.getDepartment());
         Integer orgId = organisationDAO.getOrganisationIdByName(user.getOrganisation());
 
         user.setEnabled(true);
+
+        jdbcTemplate.update("INSERT INTO roles VALUES(?, ?)", user.getUsername(), "USER");
 
         jdbcTemplate.update("INSERT INTO users(\n" +
                 " user_username," +
