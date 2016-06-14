@@ -5,7 +5,6 @@ $('.bubble-left').click(function () {
 });
 
 $(document).ready(function () {
-
     function getMyName() {
         var name;
         $.ajax({
@@ -106,6 +105,9 @@ $(document).ready(function () {
                         } else {
                             $('#' + parseMsg.srcUserID + ' .circle').show();
                         }
+                        $div = $('#' + parseMsg.srcUserID);
+                        $div.remove();
+                        $('#message-user-list-id').prepend($div);
                     })
 
                 })
