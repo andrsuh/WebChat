@@ -17,7 +17,7 @@ body {
     margin: auto;
     margin-top: 2%;
     margin-bottom: 2%;
-    height: 800px; /*Global Height of Widget*/
+    height: 600px; /*Global Height of Widget*/
     width: 1200px; /*Global Width of Widget*/
     background: #E1E1E1;
     box-shadow: 0px 0px 50px #1E1E1E;
@@ -38,7 +38,6 @@ body {
     width: 100%;
     height: 89%;
     color: #000000; /*6A9BDF*/
-
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
