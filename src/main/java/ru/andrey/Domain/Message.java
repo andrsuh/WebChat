@@ -1,8 +1,6 @@
 package ru.andrey.Domain;
 
-/**
- * Created by andrey on 30.05.16.
- */
+
 public class Message {
     private Integer id;
     private String content;

@@ -81,9 +81,6 @@ public class OrganisationDAOImpl implements OrganisationDAO {
         );
     }
 
-//    SELECT D.dep_name dep_name FROM departments D JOIN dep_org C
-//    ON D.dep_id = C.dep_id
-//    WHERE C.org_id = (SELECT org_id FROM organisations WHERE org_name = 'EMC Corporation')
 
     @Override
     public List<Department> getAllDepartments(String orgName) {
@@ -105,10 +102,6 @@ public class OrganisationDAOImpl implements OrganisationDAO {
                 }
         );
     }
-
-//    SELECT P.pos_name FROM positions P JOIN pos_org C
-//    ON P.pos_id = C.pos_id
-//    WHERE C.org_id = (SELECT org_id FROM organisations WHERE org_name = 'EMC Corporation')
 
     @Override
     public List<Position> getAllPositions(String orgName) {

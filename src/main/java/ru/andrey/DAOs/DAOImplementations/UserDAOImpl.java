@@ -80,17 +80,17 @@ public class UserDAOImpl implements UserDAO {
         jdbcTemplate.update("INSERT INTO roles VALUES(?, ?)", user.getUsername(), "USER");
 
         jdbcTemplate.update("INSERT INTO users(\n" +
-                " user_username," +
-                " user_password," +
-                " user_enabled," +
-                " user_name," +
-                " user_sex," +
-                " user_details," +
-                " user_position_id," +
-                " user_department_id," +
-                " user_organisation_id" +
-                " ) VALUES" +
-                " (?, ?, ?, ?, ?::sex, ?, ?, ?, ?)",
+                        " user_username," +
+                        " user_password," +
+                        " user_enabled," +
+                        " user_name," +
+                        " user_sex," +
+                        " user_details," +
+                        " user_position_id," +
+                        " user_department_id," +
+                        " user_organisation_id" +
+                        " ) VALUES" +
+                        " (?, ?, ?, ?, ?::sex, ?, ?, ?, ?)",
                 user.getUsername(), user.getPassword(),
                 user.isEnabled(), user.getName(), user.getSex(),
                 user.getDetails(), posId, depId, orgId);

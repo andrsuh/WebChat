@@ -3,12 +3,9 @@ package ru.andrey.DAOs.DAOImplementations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 import ru.andrey.DAOs.DAOInterfaces.MessageDAO;
 import ru.andrey.Domain.Message;
-import ru.andrey.Domain.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,8 +43,8 @@ public class MessageDAOImpl implements MessageDAO {
 
         jdbcTemplate.update(
                 "INSERT INTO messages(msg_time, msg_dst_user_id, msg_src_user_id, msg_content)\n" +
-                    " VALUES\n" +
-                    " (?, ?, ?, ?)",
+                        " VALUES\n" +
+                        " (?, ?, ?, ?)",
                 new Timestamp(Calendar.getInstance().getTimeInMillis()),
                 toUserID,
                 fromUserID,
@@ -61,15 +58,6 @@ public class MessageDAOImpl implements MessageDAO {
         return message;
     }
 
-//    WITH fst AS (
-//      SELECT user_id FROM users WHERE user_username = 'Andrey Sukhovitskiy'
-//    ), snd as (
-//      SELECT user_id FROM users WHERE user_username = 'Lada Trimasova'
-//    )
-//    SELECT msg_content, msg_src_user_id, msg_dst_user_id from messages M
-//    WHERE (msg_src_user_id = 8 AND msg_dst_user_id = 11) OR
-//          (msg_src_user_id = 11 AND msg_dst_user_id = 8);
-
     @Override
     public List<Message> messagesByUser(String authenticatedUserName, Integer otherUserId) {
         Integer authenticatedUserId = jdbcTemplate.queryForObject(
@@ -77,12 +65,6 @@ public class MessageDAOImpl implements MessageDAO {
                 Integer.class,
                 authenticatedUserName
         );
-
-//        Integer sndId = jdbcTemplate.queryForObject(
-//                "select * from getUserIdByName(?)",
-//                Integer.class,
-//                sndName
-//        );
 
 
         return jdbcTemplate.query(

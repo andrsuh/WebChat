@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.andrey.DAOs.DAOInterfaces.OrganisationDAO;
 import ru.andrey.DAOs.DAOInterfaces.UserDAO;
 import ru.andrey.Domain.Department;
-import ru.andrey.Domain.Organisation;
 import ru.andrey.Domain.Position;
 import ru.andrey.Domain.User;
 
@@ -20,15 +19,6 @@ public class RegistrationController {
 
     @Autowired
     private UserDAO userDAO;
-
-//    @RequestMapping(value = "/org_choice", method = RequestMethod.GET)
-//    public String getOrganisation(ModelMap model) {
-//        Organisation organisation = new Organisation();
-//        model.addAttribute("organisation", organisation);
-//        model.addAttribute("orgList", organisationDAO.getAllOrganisation());
-//
-//        return "org_choice";
-//    }
 
     @RequestMapping("/registration")
     public String getRegistration(ModelMap model) {
@@ -60,33 +50,4 @@ public class RegistrationController {
         userDAO.addUser(user);
         return "success";
     }
-
-//    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-//    public
-////    @ResponseBody
-//    List<Position> getPositionsByOrganisation(@RequestParam(value = "org", required = true) String org) {
-//        System.out.println(org);
-//        return organisationDAO.getAllPositions(org);
-//    }
-
-//    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-//    public String getRegistration(@ModelAttribute Organisation organisation, ModelMap model) {
-//        User newUser = new User();
-//        newUser.setOrganisation(organisation.getName());
-//
-//        model.put("newUser", newUser);
-//        model.put("organisation", organisation);
-//        model.put("depList", organisationDAO.getAllDepartments(organisation.getName()));
-//        model.put("posList", organisationDAO.getAllPositions(organisation.getName()));
-//
-//        return "registration";
-//    }
-
-//    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-//    public String addNewUser(@ModelAttribute("newUser") User user) {
-//        System.out.println(user.getOrganisation());
-//
-//        userDAO.addUser(user);
-//        return "user";
-//    }
 }

@@ -1,5 +1,6 @@
 package ru.andrey.Domain;
 
+
 public class Organisation {
     private Integer id;
     private String name;

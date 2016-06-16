@@ -4,7 +4,6 @@ import ru.andrey.Domain.User;
 
 import java.util.List;
 
-
 public interface UserDAO {
     User getUserByLogin(String login);
 

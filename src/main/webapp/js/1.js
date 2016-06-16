@@ -1,5 +1,3 @@
-
-
 $('.bubble-left').click(function () {
     $(this).toggleClass('message-clicked');
 });
@@ -56,13 +54,13 @@ $(document).ready(function () {
         $('#' + id + ' .circle').hide();
         setActive(activeUserID, id);
         activeUserID = id;
-        stompClient.send("/app/messages/" + id); //, {}, JSON.stringify({ 'id': id }));
+        stompClient.send("/app/messages/" + id);
     })
 
 
     $("#sendButton").click(function () {
         if ($("#msgTextArea").val()) {
-            stompClient.send("/app/messages/newMessage/" + activeUserID, {}, $("#msgTextArea").val()); //, {}, JSON.stringify({ 'id': id }));
+            stompClient.send("/app/messages/newMessage/" + activeUserID, {}, $("#msgTextArea").val());
             addMessage(-1, activeUserID, $("#msgTextArea").val());
             $("#msgTextArea").val('');
         }
@@ -71,8 +69,7 @@ $(document).ready(function () {
     function setActive(activeUserID, id) {
         $('#' + activeUserID).toggleClass('active-user');
         $('#' + id).toggleClass('active-user');
-        stompClient.send("/app/messages/" + id); //, {}, JSON.stringify({ 'id': id }));
-
+        stompClient.send("/app/messages/" + id);
     }
 
 
@@ -118,13 +115,13 @@ $(document).ready(function () {
         },
     });
 
-    $("#msgTextArea").keydown(function(event){
-        if (event.keyCode == 13 && event.ctrlKey){
+    $("#msgTextArea").keydown(function (event) {
+        if (event.keyCode == 13 && event.ctrlKey) {
             $("#sendButton").click();
         }
     });
 
-    $('#search').bind('input propertychange', function() {
+    $('#search').bind('input propertychange', function () {
 
         if (!$('#search').val()) {
 
@@ -150,12 +147,6 @@ $(document).ready(function () {
             }
 
         })
-
-
-
-        // if(this.value.length){
-        //     $("#yourBtnID").show();
-        // }
     });
 
 })
